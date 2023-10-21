@@ -4,6 +4,9 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 识别某些webpack类别的错误，并对他们进行整理、聚合、优先级的排列
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+
+console.log('process.env.ENV-', process.env.ENV);
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 
@@ -39,6 +42,11 @@ const prodConfig = {
       ignoreOrder: true,
     })
   ]
+}
+
+// 包分析工具
+if (process.env.ENV === 'ANALYZE') {
+  prodConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
 module.exports = merge(baseConfig, prodConfig);
