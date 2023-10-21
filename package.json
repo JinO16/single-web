@@ -1,0 +1,49 @@
+{
+  "name": "single-web",
+  "version": "1.0.0",
+  "description": "SPA模板",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --config ./scripts/webpack.dev.js",
+    "build": "cross-env ENV=DEV node ./scripts/utils/build.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "less": "^4.2.0",
+    "less-loader": "^11.1.3",
+    "postcss-less": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "webpack-dev-server": "^4.15.1",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/plugin-transform-runtime": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.23.2",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
+    "chalk": "4.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.8.1",
+    "cssnano": "^6.0.1",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "ora": "5.1.0",
+    "portfinder": "^1.0.32",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

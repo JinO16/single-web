@@ -1,0 +1,30 @@
+// .babelrc
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      // css module
+      "react-css-modules",
+      {
+          "autoResolveMultipleImports": true,
+          "generateScopedName": "[local]-[contenthash:5]",
+          "filetypes": {
+              ".less": {
+                  "syntax": "postcss-less"
+              }
+          }
+      }
+    ],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ]
+
+}
