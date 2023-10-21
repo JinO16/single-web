@@ -14,3 +14,6 @@ yarn
 npm run dev
 
 yarn dev
+
+## 访问地址
+启动项目后，地址为：http://localhost:9001/#/home
