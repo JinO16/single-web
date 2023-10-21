@@ -1,6 +1,6 @@
 // 接口list
 const apiList = {
-
+  SERVICE: ''
 
 };
 
