@@ -3,6 +3,11 @@ import Editor from '@pages/editor';
 
 const Routers = [
     {
+        path: '/',
+        name: 'home',
+        component: Home
+    },
+    {
         path: '/home',
         name: 'home',
         component: Home

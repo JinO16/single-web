@@ -1,7 +1,10 @@
+const webpack = require('webpack');
 const cssnanoPlugin = require('cssnano');
 const autoprefixer = require('autoprefixer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+
 const path  = require('path');
 
 const postCssLoader = {
@@ -41,6 +44,36 @@ module.exports = {
     // 不写文件后缀名时，默认的解析规则
     extensions: ['.ts', '.tsx', '.scss', '.json', '.js', '.less']
   },
+  optimization: {
+    concatenateModules: true,
+    splitChunks: {
+        maxInitialRequests: 6,
+        cacheGroups: {
+          // 正常情况下webpack会自动将异步import的包自动打成一个单独的包，供按需加载
+          // 这里以vconsole为例 - 作为拆包的模板 
+            vconsole: {
+                test: /[\\/]vconsole[\\/]/,
+                chunks: 'all',
+                name: 'vconsole',
+                // 设置优先级
+                priority: 12
+            },
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                chunks: 'all',
+                name: 'vendors',
+                priority: 10,
+            },
+            common: {
+                chunks: 'all',
+                minChunks: 2,
+                minSize: 10,
+                name: 'common',
+                priority: 5,
+            },
+        },
+    }
+  },
   module: {
     rules: [
       {
@@ -73,12 +106,22 @@ module.exports = {
     ],
   },
   plugins: [
+    // 环境变量注入
+    new webpack.DefinePlugin({
+        env: {
+            ENV: JSON.stringify(process.env.ENV),
+        }
+    }),
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css'
     }),
     new htmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, '../public/index.html'),
+    }),
+    // 设置js资源加载顺序为defer
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
     }),
   ]
 }
